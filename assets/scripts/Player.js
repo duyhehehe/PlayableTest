@@ -15,20 +15,15 @@ cc.Class({
             type: cc.Prefab,
         },
         fireInterval: 0,
+        isMouseTouch: false,
     },
 
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
-        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
-        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
-
-        this.isMovingLeft = false;
-        this.isMovingRight = false;
-        this.isMovingUp = false;
-        this.isMovingDown = false;
-
-        this.schedule(this.shoot, this.fireInterval);
+        this.isMouseTouch = false;
+        this.node.on(cc.Node.EventType.TOUCH_MOVE, this.onTouchMove, this);
+        this.node.on(cc.Node.EventType.TOUCH_END, this.setTouchEnd, this);
     },
 
     onDestroy() {
@@ -36,38 +31,13 @@ cc.Class({
         cc.systemEvent.off(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
     },
 
-    onKeyDown(event) {
-        switch (event.keyCode) {
-            case cc.macro.KEY.left:
-                this.isMovingLeft = true;
-                break;
-            case cc.macro.KEY.right:
-                this.isMovingRight = true;
-                break;
-            case cc.macro.KEY.up:
-                this.isMovingUp = true;
-                break;
-            case cc.macro.KEY.down:
-                this.isMovingDown = true;
-                break;
-        }
-    },
 
-    onKeyUp(event) {
-        switch (event.keyCode) {
-            case cc.macro.KEY.left:
-                this.isMovingLeft = false;
-                break;
-            case cc.macro.KEY.right:
-                this.isMovingRight = false;
-                break;
-            case cc.macro.KEY.up:
-                this.isMovingUp = false;
-                break;
-            case cc.macro.KEY.down:
-                this.isMovingDown = false;
-                break;
-        }
+    onTouchMove(event) {
+        this.isMouseTouch = true;
+        console.log(this.node.parent);
+        let newPos = cc.v2(event.getLocation().x - this.node.parent.width / 2, event.getLocation().y - this.node.parent.height / 2);
+        this.node.setPosition(newPos);
+        this.node.getComponent("Player").shoot();
     },
 
     shoot() {
@@ -77,23 +47,8 @@ cc.Class({
         bullet.getComponent("Bullet").startMoving();
     },
 
-    update(dt) {
-        let pos = this.node.position;
+    // update(dt) {
 
-        if (this.isMovingLeft) {
-            pos.x -= this.speed * dt;
-        }
-        if (this.isMovingRight) {
-            pos.x += this.speed * dt;
-        }
-        if (this.isMovingUp) {
-            pos.y += this.speed * dt;
-        }
-        if (this.isMovingDown) {
-            pos.y -= this.speed * dt;
-        }
-
-        this.node.position = pos;
-    }
+    // }
 
 });
