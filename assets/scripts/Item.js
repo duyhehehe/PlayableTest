@@ -9,30 +9,34 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        // foo: {
-        //     // ATTRIBUTES:
-        //     default: null,        // The default value will be used only when the component attaching
-        //                           // to a node for the first time
-        //     type: cc.SpriteFrame, // optional, default is typeof default
-        //     serializable: true,   // optional, default is true
-        // },
-        // bar: {
-        //     get () {
-        //         return this._bar;
-        //     },
-        //     set (value) {
-        //         this._bar = value;
-        //     }
-        // },
+        speed: 200,
     },
 
     // LIFE-CYCLE CALLBACKS:
 
-    // onLoad () {},
+    onLoad() {
+        this.node.group = "item";
+    },
 
-    start () {
+    start() {
 
     },
 
-    // update (dt) {},
+    update(dt) {
+        this.node.y -= this.speed * dt;
+
+        if (this.node.y < -cc.winSize.height / 2) {
+            this.node.destroy();
+        }
+    },
+
+    onCollisionEnter(other, self) {
+        if (other.node.group === "player") {
+            this.collectItem(other.node);
+        }
+    },
+
+    collectItem(player) {
+        this.node.destroy();
+    }
 });

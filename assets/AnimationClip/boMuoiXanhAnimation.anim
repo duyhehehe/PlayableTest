@@ -1,0 +1,49 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "boMuoiXanhAnimation",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.08333333333333333,
+  "sample": 60,
+  "speed": 0.4,
+  "wrapMode": 2,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "b0148080-4c3d-4985-876f-d26d3a39bc47"
+            }
+          },
+          {
+            "frame": 0.016666666666666666,
+            "value": {
+              "__uuid__": "38e1ff72-3583-48d9-949d-a937690b630b"
+            }
+          },
+          {
+            "frame": 0.03333333333333333,
+            "value": {
+              "__uuid__": "38575ced-3097-498d-bc6d-547da8d0cf94"
+            }
+          },
+          {
+            "frame": 0.05,
+            "value": {
+              "__uuid__": "0385f60b-f901-4f05-bbfa-a2be0968f283"
+            }
+          },
+          {
+            "frame": 0.06666666666666667,
+            "value": {
+              "__uuid__": "48ea09ef-7908-427c-99c6-eb8d9cebc8c2"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}

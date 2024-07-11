@@ -2,7 +2,8 @@
   "group-list": [
     "bullet",
     "enemy",
-    "player"
+    "player",
+    "item"
   ],
   "collision-matrix": [
     [
@@ -12,11 +13,18 @@
     [
       true,
       false,
-      false
+      true
+    ],
+    [
+      false,
+      true,
+      false,
+      true
     ],
     [
       false,
       false,
+      true,
       false
     ]
   ],
